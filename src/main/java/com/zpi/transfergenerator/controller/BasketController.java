@@ -1,9 +1,9 @@
 package com.zpi.transfergenerator.controller;
 
+import com.zpi.transfergenerator.model.Basket;
 import com.zpi.transfergenerator.model.BasketConverter;
 import com.zpi.transfergenerator.model.TransferConverter;
 import com.zpi.transfergenerator.repository.BasketRepository;
-import com.zpi.transfergenerator.repository.TransferRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,10 +36,10 @@ public class BasketController {
     }
 
     @PostMapping
-    public ResponseEntity<Error> create(@RequestBody com.zpi.transfergenerator.model.Basket basket) {
-        basketRepository.save(basketConverter.fromModel(basket));
+    public ResponseEntity<Basket> create(@RequestBody Basket basket) {
+        final var entity = basketRepository.save(basketConverter.fromModel(basket));
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(basketConverter.toModel(entity), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

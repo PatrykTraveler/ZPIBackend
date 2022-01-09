@@ -32,10 +32,10 @@ public class ContractorController {
     }
 
     @PostMapping
-    public ResponseEntity<Error> create(@RequestBody Contractor contractor) {
-        contractorRepository.save(contractorConverter.fromModel(contractor));
+    public ResponseEntity<Contractor> create(@RequestBody Contractor contractor) {
+        final var entity = contractorRepository.save(contractorConverter.fromModel(contractor));
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(contractorConverter.toModel(entity), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

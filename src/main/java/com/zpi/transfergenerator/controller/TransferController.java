@@ -32,10 +32,10 @@ public class TransferController {
     }
 
     @PostMapping
-    public ResponseEntity<Error> create(@RequestBody Transfer transfer) {
-        transferRepository.save(transferConverter.fromModel(transfer));
+    public ResponseEntity<Transfer> create(@RequestBody Transfer transfer) {
+        final var entity = transferRepository.save(transferConverter.fromModel(transfer));
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(transferConverter.toModel(entity),HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
