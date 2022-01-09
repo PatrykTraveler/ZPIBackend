@@ -13,7 +13,7 @@ public class BasketConverter {
     }
 
     public Basket toModel(com.zpi.transfergenerator.entity.Basket basket) {
-        return new Basket(basket.getName(), basket.getTerm(), basket.getStatus(), basket.getTransfers().stream().map(transferConverter::toModel).collect(Collectors.toList()));
+        return new Basket(basket.getId(), basket.getName(), basket.getTerm(), basket.getStatus(), basket.getTransfers().stream().map(transferConverter::toModel).collect(Collectors.toList()));
     }
 
     public com.zpi.transfergenerator.entity.Basket fromModel(Basket basket) {

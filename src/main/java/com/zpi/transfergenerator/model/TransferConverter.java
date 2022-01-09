@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TransferConverter {
     public Transfer toModel(com.zpi.transfergenerator.entity.Transfer transfer) {
-        return new Transfer(transfer.getName(), transfer.getIban(), transfer.getDescription(), transfer.getStreet(), transfer.getZipcode(), transfer.getCity());
+        return new Transfer(transfer.getId(), transfer.getName(), transfer.getIban(), transfer.getDescription(), transfer.getStreet(), transfer.getZipcode(), transfer.getCity());
     }
 
     public com.zpi.transfergenerator.entity.Transfer fromModel(Transfer transfer) {

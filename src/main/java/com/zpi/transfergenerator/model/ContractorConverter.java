@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContractorConverter {
     public Contractor toModel(com.zpi.transfergenerator.entity.Contractor contractor) {
-        return new Contractor(contractor.getFirstName(), contractor.getLastName(), contractor.getCompany(), contractor.getStreet(), contractor.getZipcode(), contractor.getCity(), contractor.getIban());
+        return new Contractor(contractor.getId(), contractor.getFirstName(), contractor.getLastName(), contractor.getCompany(), contractor.getStreet(), contractor.getZipcode(), contractor.getCity(), contractor.getIban());
     }
 
     public com.zpi.transfergenerator.entity.Contractor fromModel(Contractor contractor) {

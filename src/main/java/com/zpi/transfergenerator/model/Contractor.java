@@ -1,6 +1,7 @@
 package com.zpi.transfergenerator.model;
 
 public class Contractor {
+    private final Long id;
     private final String firstName;
     private final String lastName;
     private final String company;
@@ -9,7 +10,8 @@ public class Contractor {
     private final String city;
     private final String iban;
 
-    public Contractor(String firstName, String lastName, String company, String street, String zipcode, String city, String iban) {
+    public Contractor(Long id, String firstName, String lastName, String company, String street, String zipcode, String city, String iban) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.company = company;
@@ -17,6 +19,10 @@ public class Contractor {
         this.zipcode = zipcode;
         this.city = city;
         this.iban = iban;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getFirstName() {
