@@ -9,11 +9,9 @@ import java.util.stream.Collectors;
 
 @Component
 public class BasketConverter {
-    private final TransferConverter transferConverter;
     private final TransferRepository transferRepository;
 
-    public BasketConverter(TransferConverter transferConverter, TransferRepository transferRepository) {
-        this.transferConverter = transferConverter;
+    public BasketConverter(TransferRepository transferRepository) {
         this.transferRepository = transferRepository;
     }
 

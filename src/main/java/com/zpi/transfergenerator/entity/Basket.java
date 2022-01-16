@@ -17,7 +17,7 @@ public class Basket {
     private byte status;
 
     @OneToMany(
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.REMOVE,
             orphanRemoval = true
     )
     private List<Transfer> transfers = new ArrayList<>();
