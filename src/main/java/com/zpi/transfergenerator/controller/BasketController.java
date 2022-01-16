@@ -4,6 +4,7 @@ import com.zpi.transfergenerator.model.Basket;
 import com.zpi.transfergenerator.model.BasketConverter;
 import com.zpi.transfergenerator.model.TransferConverter;
 import com.zpi.transfergenerator.repository.BasketRepository;
+import com.zpi.transfergenerator.repository.TransferRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,13 @@ public class BasketController {
     private final BasketRepository basketRepository;
     private final BasketConverter basketConverter;
     private final TransferConverter transferConverter;
+    private final TransferRepository transferRepository;
 
-    public BasketController(BasketRepository basketRepository, BasketConverter basketConverter, TransferConverter transferConverter) {
+    public BasketController(BasketRepository basketRepository, BasketConverter basketConverter, TransferConverter transferConverter, TransferRepository transferRepository) {
         this.basketRepository = basketRepository;
         this.basketConverter = basketConverter;
         this.transferConverter = transferConverter;
+        this.transferRepository = transferRepository;
     }
 
     @GetMapping
@@ -50,7 +53,12 @@ public class BasketController {
             newBasket.setTerm(basket.getTerm());
             newBasket.setStatus(basket.getStatus());
             newBasket.setName(basket.getName());
-            final var transfers = basket.getTransfers().stream().map(transferConverter::fromModel).collect(Collectors.toList());
+            final var transfers = basket.getTransfers().stream()
+                    .map(transferRepository::findById)
+                    .filter(Optional::isPresent)
+                    .map(Optional::get)
+                    .collect(Collectors.toList());
+
             Optional.ofNullable(newBasket.getTransfers()).ifPresentOrElse(tr -> tr.addAll(transfers), () -> newBasket.setTransfers(transfers));
             basketRepository.save(newBasket);
 

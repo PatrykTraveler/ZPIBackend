@@ -13,9 +13,9 @@ public class Basket {
     private final String name;
     private final Date term;
     private final byte status;
-    private final List<Transfer> transfers;
+    private final List<Long> transfers;
 
-    public Basket(Long id, String name, Date term, byte status, List<Transfer> transfers) {
+    public Basket(Long id, String name, Date term, byte status, List<Long> transfers) {
         this.id = id;
         this.name = name;
         this.term = term;
@@ -39,7 +39,7 @@ public class Basket {
         return status;
     }
 
-    public List<Transfer> getTransfers() {
+    public List<Long> getTransfers() {
         return transfers;
     }
 }
