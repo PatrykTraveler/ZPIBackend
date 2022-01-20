@@ -72,11 +72,14 @@ public class PaymentGenerator {
         for (var transfer : basket.getTransfers()) {
             final var cdtTrfTxInf = new CreditTransferTransactionInformation10();
             final var pmtId = new PaymentIdentification1();
+            pmtId.setEndToEndId(randomNumericStringProvider.getRandomString(10));
             pmtId.setInstrId(randomNumericStringProvider.getRandomString(5));
             cdtTrfTxInf.setPmtId(pmtId);
 
             final var amt = new AmountType3Choice();
+
             final var instdAmt = new ActiveOrHistoricCurrencyAndAmount();
+            instdAmt.setCcy("PLN");
             instdAmt.setValue(BigDecimal.valueOf(transfer.getAmount()));
             amt.setInstdAmt(instdAmt);
             cdtTrfTxInf.setAmt(amt);
